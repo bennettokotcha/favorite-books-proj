@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>book details</title>
+    {% load static %}
+    <link rel="stylesheet" href='{% static "login_books.css" %}'>
+</head>
+<body>
+    <p id='link'><a href="/logout">Log Out</a></p>
+    <h1 class="lines">Welcome, {{request.session.username}}!</h1>
+    <div id="wrapper">
+        <div id="add_book">
+            <h2 class="h2">Add a Favorite Book</h2>
+            {% if this_book.uploaded_by.id == request.session.userid %}
+            <form action="/add-book/edit/{{this_book.id}}" method="POST">
+                {% csrf_token %}
+                <label for="title">Title</label>
+                <input type="text" name="title" value="{{this_book.title}}">
+                <br>
+                <p>Added by: {{uploader.first_name}} {{uploader.last_name}}</p>
+                <p>Added on: {{this_book.created_at}}</p>
+                <p>Last Updated on: {{this_book.updated_at}}</p>
+                <label for="desc">About</label>
+                <textarea value="" name="desc" id="desc_area" cols="30" rows="10">{{this_book.desc}}</textarea>
+                <br>
+                <button class="button" type="submit">Update</button>
+                <a href="/destroy/{{this_book.id}}"><input class="button" id="red" type="button" value="Delete"></a>
+            </form>
+            {% else %}
+            <h1>{{this_book.title}}</h1>
+            <p>Added by: {{uploader.first_name}} {{uploader.last_name}}</p>
+            <p>Added on: {{this_book.created_at}}</p>
+            <p>Last Updated on: {{this_book.updated_at}}</p>
+            <p>{{this_book.desc}}</p>
+            {% endif %}
+        </div>
+        {% if messages %}
+        <ul class='messages'>
+            {% for message in messages %}
+            <li class='errors' {% if message.tags %} class="{{message.tags}}"{% endif %}>{{message}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <div id="all_books">
+            <h2 class="h2">Users Who Like This Book</h2>
+            {% for user in this_book.users_who_like.all %}
+            <ul>
+                <li>{{user.first_name}} {{user.last_name}}</li>
+            </ul>
+            {% endfor %}
+            {% if not logged_user in this_book.users_who_like.all %}
+            <p>
+                <a class='favorites' href="/add-likes/{{this_book.id}}">Add to Favorites</a>
+            </p>
+            {% else %}
+            <p>
+                <a href="/remove-like/{{this_book.id}}">Un-Favorite</a>
+            </p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

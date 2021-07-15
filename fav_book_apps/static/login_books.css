@@ -1,0 +1,48 @@
+* {
+    margin: 0px auto;
+    padding: 0px;
+    /* outline: 1px dotted yellowgreen; */
+}
+#link {
+    text-align: right;
+    padding: 50px;
+}
+#wrapper {
+    display:flex;
+}
+.lines {
+    padding: 25px;
+    border-bottom: 2px solid black;
+}
+h2.h2 {
+    margin-bottom: 15px;
+}
+#add_book {
+    padding: 20px;
+}
+#all_books {
+    padding: 20px;
+}
+input {
+    margin-bottom: 20px;
+}
+#desc_area {
+    vertical-align: text-top;
+}
+.button {
+    margin-top: 48px;
+    margin-left: 25px;
+    padding: 5px;
+    border: 2px solid black;
+}
+#red {
+    background-color:rgba(197, 6, 6, 0.767);
+    color: white;
+}
+li.errors {
+    color:red;
+    margin-top: 10px;
+}
+p {
+    padding: 10px;
+}

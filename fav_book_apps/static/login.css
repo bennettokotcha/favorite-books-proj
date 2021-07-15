@@ -1,0 +1,22 @@
+* {
+    margin: 0px auto;
+    padding: 0px;
+    /* outline: 1px dotted yellowgreen; */
+}
+body {
+    display: flex;
+}
+h1 {
+    padding: 58px;
+}
+input {
+    margin-bottom: 25px;
+}
+button {
+    padding: 5px;
+    border: 2px solid black;
+}
+li.errors {
+    color:red;
+    margin-top: 10px;
+}
